@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InheritanceSortedIntList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">17214-25fall-lab03</a> &gt; <a href="index.source.html" class="el_package">edu.cmu.cs.cs214.rec04</a> &gt; <span class="el_source">InheritanceSortedIntList.java</span></div><h1>InheritanceSortedIntList.java</h1><pre class="source lang-java linenums">package edu.cmu.cs.cs214.rec04;
 
-
 /**
  * InheritanceSortedIntList -- a variant of a SortedIntList that keeps
  * count of the number of attempted element insertions (not to be confused
  * with the current size, which goes down when an element is removed)
  * and exports an accessor (totalAdded) for this count.
- *
- * @author Nora Shoemaker
- *
  */
+<span class="nc" id="L9">public class InheritanceSortedIntList extends SortedIntList {</span>
 
-<span class="nc" id="L14">public class InheritanceSortedIntList {</span>
-    // Write your implementation below with API documentation
+<span class="nc" id="L11">    private int totalAdded = 0;</span>
 
+    /**
+     * Returns the total number of attempted element insertions.
+     */
+    public int getTotalAdded() {
+<span class="nc" id="L17">        return totalAdded;</span>
+    }
+
+    /**
+     * Attempts to add a single element to the list.
+     * Increments the total-added counter regardless of success.
+     */
+    @Override
+    public boolean add(int value) {
+<span class="nc" id="L26">        totalAdded += 1;</span>
+<span class="nc" id="L27">        return super.add(value);</span>
+    }
+
+    /**
+     * Attempts to add all elements from another IntegerList.
+     * Increments the total-added counter by the number of attempted insertions.
+     */
+    @Override
+    public boolean addAll(IntegerList other) {
+<span class="nc" id="L36">        totalAdded += other.size();</span>
+<span class="nc" id="L37">        return super.addAll(other);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

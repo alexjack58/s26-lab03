@@ -5,13 +5,76 @@
  * count of the number of attempted element insertions (not to be confused
  * with the current size, which goes down when an element is removed)
  * and exports an accessor (totalAdded) for this count.
- *
- * @author Nora Shoemaker
- *
  */
+public class DelegationSortedIntList implements IntegerList {
 
-<span class="nc" id="L13">public class DelegationSortedIntList {</span>
-    // Write your implementation below with API documentation
+    private final SortedIntList inner;
+<span class="nc" id="L12">    private int totalAdded = 0;</span>
 
+    /**
+     * Constructs an empty DelegationSortedIntList.
+     */
+<span class="nc" id="L17">    public DelegationSortedIntList() {</span>
+<span class="nc" id="L18">        inner = new SortedIntList();</span>
+<span class="nc" id="L19">    }</span>
+
+    /**
+     * Returns the total number of attempted element insertions.
+     */
+    public int getTotalAdded() {
+<span class="nc" id="L25">        return totalAdded;</span>
+    }
+
+    /**
+     * Attempts to add a single element to the list.
+     * Increments the total-added counter regardless of success.
+     */
+    @Override
+    public boolean add(int value) {
+<span class="nc" id="L34">        totalAdded += 1;</span>
+<span class="nc" id="L35">        return inner.add(value);</span>
+    }
+
+    /**
+     * Attempts to add all elements from another IntegerList.
+     * Increments the total-added counter by the number of attempted insertions.
+     */
+    @Override
+    public boolean addAll(IntegerList other) {
+<span class="nc" id="L44">        totalAdded += other.size();</span>
+<span class="nc" id="L45">        return inner.addAll(other);</span>
+    }
+
+    /**
+     * Returns the element at the given index.
+     */
+    @Override
+    public int get(int index) {
+<span class="nc" id="L53">        return inner.get(index);</span>
+    }
+
+    /**
+     * Attempts to remove a single value from the list.
+     */
+    @Override
+    public boolean remove(int value) {
+<span class="nc" id="L61">        return inner.remove(value);</span>
+    }
+
+    /**
+     * Attempts to remove all values from this list that appear in the other list.
+     */
+    @Override
+    public boolean removeAll(IntegerList other) {
+<span class="nc" id="L69">        return inner.removeAll(other);</span>
+    }
+
+    /**
+     * Returns the current number of elements in the list.
+     */
+    @Override
+    public int size() {
+<span class="nc" id="L77">        return inner.size();</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
